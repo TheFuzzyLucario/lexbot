@@ -1,7 +1,7 @@
 var token = process.env.token
 const fs = require('fs');
 const Discord = require('discord.js');
-const configuration = require("./variables.json")
+const {prefix, ver} = require("./variables.json")
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(filename => filename.endsWith('.js'));
@@ -18,7 +18,7 @@ client.on('ready', () => {
 client.login(token);
 
 client.on('message', message => {
-  if (!message.content.startsWith(configuration.prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
